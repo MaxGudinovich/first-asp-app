@@ -24,7 +24,7 @@ builder.Services.AddTransient<ICompanyRepo, CompanyRepo>();
 builder.Services.AddTransient<ICompanyService, CompanyService>();
 builder.Services.AddTransient<IActorRepo, ActorRepo>();
 builder.Services.AddTransient<IActorService, ActorService>();
-
+builder.Services.AddTransient<IActorFilmRepo, ActorFilmRepo>();
 
 builder.Services.AddAutoMapper(typeof(FirstApiMappingProfile));
 

@@ -39,4 +39,13 @@ public class FilmsController : ControllerBase
         return Ok(result);
 
     }
+
+    [HttpPost("with-actors")]
+    public IActionResult PostNewFilmWithActors([FromBody] FilmCreateModel film)
+    {
+        var result = _service.AddFilmWithActors(film);
+
+        return Ok(result);
+    }
+
 }

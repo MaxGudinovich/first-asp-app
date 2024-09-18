@@ -9,11 +9,13 @@ public class FilmService : IFilmService
 {
     private readonly IFilmRepo _repo;
     private readonly IMapper _mapper;
+    private readonly IActorFilmRepo _actorFilmRepo;
 
-    public FilmService(IFilmRepo repo, IMapper mapper)
+    public FilmService(IFilmRepo repo, IMapper mapper, IActorFilmRepo actorFilmRepo)
     {
         _repo = repo;
         _mapper = mapper;
+        _actorFilmRepo = actorFilmRepo;
     }
 
     public FilmModel GetById(int id)
@@ -42,5 +44,32 @@ public class FilmService : IFilmService
         var result = _mapper.Map<FilmEntity, FilmModel>(addedEntity);
 
         return result;
+    }
+
+    public FilmModel AddFilmWithActors(FilmCreateModel film)
+    {
+        var filmEntity = new FilmEntity
+        {
+            Name = film.Name,
+            CompanyId = film.CompanyId
+        };
+
+        var createFilm = _repo.AddFilm(filmEntity);
+        var actorsFilmsEntities = new List<ActorFilmEntity>();
+
+        foreach (var actorId in film.ActorIds)
+        {
+            var actorFilmEntity = new ActorFilmEntity
+            {
+                ActorId = actorId,
+                FilmId = (int)createFilm.Id
+            };
+
+            actorsFilmsEntities.Add(actorFilmEntity);
+        }
+
+        _actorFilmRepo.AddRange(actorsFilmsEntities);
+
+        return _mapper.Map<FilmEntity, FilmModel>(createFilm);
     }
 }

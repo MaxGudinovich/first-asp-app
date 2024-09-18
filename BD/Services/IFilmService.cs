@@ -8,5 +8,7 @@ public interface IFilmService
     FilmModel GetByIdWithCompany(int id);
     FilmModel AddFilm(FilmModel film);
 
+    FilmModel AddFilmWithActors(FilmCreateModel film);
+
 
 }
