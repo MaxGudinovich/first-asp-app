@@ -8,6 +8,7 @@ public class FirstApiMappingProfile : Profile
 {
     public FirstApiMappingProfile()
     {
+        CreateMap<FilmDTO, FilmEntity>().ReverseMap();
         CreateMap<FilmModel, FilmEntity>().ReverseMap();
         CreateMap<CompanyModel, CompanyEntity>().ReverseMap();
         CreateMap<ActorModel, ActorEntity>().ReverseMap();

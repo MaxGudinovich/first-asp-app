@@ -1,6 +1,6 @@
 ﻿namespace BD.Entities.Models;
 
-public class ActorModel
+public class FilmDTO
 {
     public int? Id { get; set; }
 
